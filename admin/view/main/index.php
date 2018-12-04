@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header card-header-primary">
 
-                <a href="<?= SITE_URL?>main/create" style="float: right;">
+                <a href="<?= SITE_URL ?>/main/create" style="float: right;">
                     <i class="material-icons text-white">queue</i>
                 </a>
 
@@ -61,11 +61,12 @@
                                     <?= $m['sort'] ?>
                                 </td>
                                 <td style="width: 70px;">
-                                    <a href="<?= SITE_URL ?>main/update?id=<?= $m['id'] ?>">
+                                    <a href="<?= SITE_URL ?>/main/update?id=<?= $m['id'] ?>">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
-                                    <a href="<?= SITE_URL ?>main/delete?id=<?= $m['id']?>">
-                                    <i class="material-icons text-danger" onclick="return confirm('Really delete?');">delete</i>
+                                    <a href="<?= SITE_URL ?>/main/delete?id=<?= $m['id'] ?>">
+                                        <i class="material-icons text-danger"
+                                           onclick="return confirm('Really delete?');">delete</i>
                                     </a>
                                 </td>
                             </tr>

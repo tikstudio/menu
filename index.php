@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-$con = new PDO('mysql:host=localhost;dbname=menu', 'root', '');
+$con = new PDO('mysql:host=localhost;dbname=menu', 'root', 'root');
 $stmt = $con->prepare('select * from menu order by sort');
 $stmt->execute();
 $test = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,6 @@ function draw_menu(&$menu, $p_id = null) {
             draw_menu($menu, $m['id']);
             echo "</li>";
         }
-
     }
     echo "</ul>";
 }

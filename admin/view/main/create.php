@@ -7,7 +7,7 @@
 <!--                <p class="card-category">--><?//= $item['title'] ?><!--</p>-->
             </div>
             <div class="card-body">
-                <form action="<?= SITE_URL?>main/" method="post">
+                <form action="<?= SITE_URL?>/main/create" method="post">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">

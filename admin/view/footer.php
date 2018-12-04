@@ -32,6 +32,8 @@
 
 <script src="<?= SITE_URL ?>/assets/scripts/material-dashboard.js"></script>
 <script src="<?= SITE_URL ?>/assets/scripts/plugins/bootstrap-selectpicker.js"></script>
+<script src="<?= SITE_URL ?>/assets/scripts/plugins/bootstrap-notify.js"></script>
+<script src="<?= SITE_URL ?>/assets/scripts/script.js"></script>
 
 </body>
 </html>

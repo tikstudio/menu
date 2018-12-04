@@ -2,12 +2,16 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-primary">
-                <h4 class="card-title">Edit Menu</h4>
+                <h4 class="card-title">
+                    <?= $item['id'] ? 'Edit' : 'Add' ?>
+                    Menu
+                </h4>
                 <p class="card-category"><?= $item['title'] ?></p>
 
             </div>
             <div class="card-body">
-                <form action="<?= SITE_URL?>main" method="post">
+                <form action="<?= SITE_URL ?>/main/<?= $item['id'] ? 'update' : 'create' ?>" method="post">
+                    <input type="hidden" name="id" value="<?= $item['id'] ?>">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">
@@ -15,7 +19,6 @@
                                 <input value="<?= $item['title'] ?>" name="new_title" type="text" class="form-control">
                             </div>
                         </div>
-                        <?= var_dump($id)?>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -28,8 +31,8 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Parent</label>
-                        <select class="form-control" data-style="btn btn-link"
-                               id="exampleFormControlSelect1">
+                        <select name="p_id" class="form-control" data-style="btn btn-link"
+                                id="exampleFormControlSelect1">
                             <option value=""></option>
                             <?php foreach ($menu as $m): ?>
                                 <option name="parent"
@@ -61,7 +64,9 @@
                             </span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right">Update</button>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <?= $item['id'] ? 'Update' : 'Create' ?>
+                    </button>
                     <div class="clearfix"></div>
                 </form>
             </div>

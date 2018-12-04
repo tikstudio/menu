@@ -2,6 +2,7 @@
 
 namespace includes;
 
+use mysql_xdevapi\Exception;
 use \PDO;
 
 class DbManager {
@@ -30,6 +31,9 @@ class DbManager {
             return $stmt;
         }
         $this->error = $stmt->errorInfo();
+        if ($this->error) {
+            throw new \Exception($this->error[2], 777);
+        }
         return false;
     }
 
@@ -38,7 +42,10 @@ class DbManager {
         if (!$stmt) {
             return null;
         }
-        return self::$con->lastInsertId();
+        if ((int) self::$con->lastInsertId()){
+            return self::$con->lastInsertId();
+        }
+        return true;
     }
 
     public function getRow($sql, $params = []) {
