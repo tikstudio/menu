@@ -32,6 +32,7 @@
                                 &nbsp;
                             </th>
                         </tr>
+
                         </thead>
                         <tbody>
                         <?php foreach ($menu as $m): ?>
@@ -58,15 +59,22 @@
                                     <a href="<?= SITE_URL ?>/main/update?id=<?= $m['id'] ?>">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
+                                    <a href="<?= SITE_URL ?>/main/delete?id=<?=$m['id'] ?>">
                                     <i class="material-icons text-danger">delete</i>
+                                    </a>
                                 </td>
                             </tr>
+
                         <?php endforeach; ?>
 
                         </tbody>
                     </table>
+                    <a href="<?= SITE_URL ?>/main/update">ADD</a>
                 </div>
             </div>
         </div>
+
     </div>
+
 </div>
+

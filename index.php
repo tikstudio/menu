@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-$con = new PDO('mysql:host=localhost;dbname=menu', 'root', 'root');
-$stmt = $con->prepare('select * from menu order by sort');
+$con = new PDO('mysql:host=localhost;dbname=menu', 'root', '');
+$stmt = $con->prepare('select * from menu WHERE status="1" order by sort');
 $stmt->execute();
 $test = $stmt->fetchAll(PDO::FETCH_ASSOC);
 draw_menu($test);

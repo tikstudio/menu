@@ -20,4 +20,22 @@ class Main extends Model {
             'id' => $id
         ]);
     }
+public function delMenu($id){
+    	return $this->getRow('UPDATE `menu` SET `status` = 0 WHERE id=:id',[
+    		'id'=> $id
+	    ]);
+}
+public function addMenu($title,$slug,$parent,$status,$sort){
+	return $this->query(
+		"INSERT INTO `menu` (`title`, `slug`, `p_id`, `status`, `sort`) 
+                VALUES (:title, :slug, :parent, :status, :sort)",
+		[
+			'title' => $title,
+			'slug' => $slug,
+			'p_id' => $parent,
+			'status' => $status,
+			'sort' => $sort,
+		]
+	);
+}
 }
