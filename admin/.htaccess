@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
 RewriteEngine  On 
-RewriteBase /lesson/menu/admin/
+RewriteBase /menu/menu/admin/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /lesson/menu/admin/index.php [L]
+RewriteRule . /menu/menu/admin/index.php [L]
 </IfModule>
 Options -Indexes

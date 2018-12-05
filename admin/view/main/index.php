@@ -58,7 +58,9 @@
                                     <a href="<?= SITE_URL ?>/main/update?id=<?= $m['id'] ?>">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
-                                    <i class="material-icons text-danger">delete</i>
+                                    <a href="<?= SITE_URL ?>/main/delete?id=<?= $m['id']?>">
+                                        <i class="material-icons text-danger">delete</i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
