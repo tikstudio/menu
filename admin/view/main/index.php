@@ -7,7 +7,7 @@
                     <i class="material-icons text-white">queue</i>
                 </a>
 
-                <h4 class="card-title ">Simple Table</h4>
+                <h4 class="card-title ">Menu Table</h4>
                 <p class="card-category"> Here is a subtitle for this table</p>
 
             </div>
