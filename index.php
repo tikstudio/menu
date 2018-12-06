@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-$con = new PDO('mysql:host=localhost;dbname=menu', 'root', 'root');
+$con = new PDO('mysql:host=localhost;dbname=menu', 'root', '');
 $stmt = $con->prepare('select * from menu order by sort');
 $stmt->execute();
 $test = $stmt->fetchAll(PDO::FETCH_ASSOC);

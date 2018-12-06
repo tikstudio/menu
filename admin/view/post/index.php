@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-header card-header-primary">
 
-                <a href="<?= SITE_URL ?>/main/create" style="float: right;">
+                <a href="<?= SITE_URL ?>post/createNews" style="float: right;">
                     <i class="material-icons text-white">queue</i>
                 </a>
 
-                <h4 class="card-title ">Menu Table</h4>
+                <h4 class="card-title ">News Table</h4>
                 <p class="card-category"> Here is a subtitle for this table</p>
 
             </div>
@@ -15,6 +15,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
+
                         <tr>
                             <th>
                                 ID
@@ -23,10 +24,10 @@
                                 Title
                             </th>
                             <th>
-                                Slug
+                                Image
                             </th>
                             <th>
-                                Parent
+                                Slug
                             </th>
                             <th>
                                 Status
@@ -35,36 +36,51 @@
                                 Sort
                             </th>
                             <th>
+                               Description
+                            </th>
+                            <th>
+                               Date
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($menu as $m): ?>
+
+                        <?php foreach ($post_news as $news): ?>
                             <tr>
                                 <td>
-                                    <?= $m['id'] ?>
+                                    <?= $news['id'] ?>
                                 </td>
                                 <td>
-                                    <?= $m['title'] ?>
+                                    <?= $news['title'] ?>
                                 </td>
                                 <td>
-                                    <?= $m['slug'] ?>
+                                    <img src=" <?= SITE_URL ?>assets/img/uploads/<?= $news['image'] ?>" class="newsImg" alt="" width="100" height="100">
+
                                 </td>
                                 <td>
-                                    <?= $m['p_id'] ?>
+                                    <?= $news['slug'] ?>
                                 </td>
                                 <td>
-                                    <?= $m['status'] ?>
+                                    <?= $news['status'] ?>
                                 </td>
                                 <td>
-                                    <?= $m['sort'] ?>
+                                    <?= $news['sort'] ?>
+                                </td>
+                                <td>
+                                    <?= mb_substr($news['description'],0, 20).'...' ?>
+                                </td>
+                                <td>
+
+                                    <?= $news['date'] ?>
                                 </td>
                                 <td style="width: 70px;">
-                                    <a href="<?= SITE_URL ?>/main/update?id=<?= $m['id'] ?>">
+                                    <a href="<?= SITE_URL ?>post/updateNews?id=<?= $news['id'] ?>">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
-                                    <a href="<?= SITE_URL ?>/main/delete?id=<?= $m['id'] ?>">
+                                    <a href="<?= SITE_URL ?>post/deleteNews?id=<?= $news['id'] ?>">
                                         <i class="material-icons text-danger"
                                            onclick="return confirm('Really delete?');">delete</i>
                                     </a>
