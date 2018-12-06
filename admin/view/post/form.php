@@ -10,7 +10,9 @@
 
             </div>
             <div class="card-body">
-                <form action="<?= SITE_URL ?>/post/<?= $item['id'] ? 'update' : 'create' ?>" method="post">
+                <form action="<?= SITE_URL ?>/post/<?= $item['id'] ? 'update' : 'create' ?>" method="post"
+                      enctype="multipart/form-data">
+                    <?= $error ?>
                     <input type="hidden" name="id" value="<?= $item['id'] ?>">
                     <div class="row">
                         <div class="col-md-12">
@@ -25,7 +27,7 @@
                             <div class="form-group bmd-form-group">
                                 <label class="bmd-label-floating">News</label>
 
-                                <textarea  name="news" id="news" style="width: 100%"><?= $item['news'] ?></textarea>
+                                <textarea name="news" id="news" style="width: 100%"><?= $item['news'] ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -49,9 +51,9 @@
                         <label class="form-check-label">
                             <input type="hidden" name="status" value="0">
                             <input <?= $item['status'] == '1' ? 'checked' : '' ?>
-                                class="form-check-input"
-                                name="status"
-                                type="checkbox" value="1">
+                                    class="form-check-input"
+                                    name="status"
+                                    type="checkbox" value="1">
                             Active
                             <span class="form-check-sign">
                                 <span class="check"></span>

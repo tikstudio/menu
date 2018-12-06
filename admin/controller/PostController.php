@@ -56,18 +56,18 @@ class PostController extends Controller {
     public function actionCreate() {
         $menu = $this->model->getMenu();
 
-            $items = [
-                'title' => isset($_POST['new_title']) ? $_POST['new_title'] : '',
-                'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : '',
-                'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
-                'status' => isset($_POST['status']) ? $_POST['status'] : null,
-                'image' => isset($_POST['img']) ? $_POST['img'] : '',
-                'news' => isset($_POST['news']) ? htmlspecialchars($_POST['news']) : null
-            ];
+        $items = [
+            'title' => isset($_POST['new_title']) ? $_POST['new_title'] : '',
+            'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : '',
+            'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
+            'status' => isset($_POST['status']) ? $_POST['status'] : null,
+            'image' => isset($_POST['img']) ? $_POST['img'] : '',
+            'news' => isset($_POST['news']) ? htmlspecialchars($_POST['news']) : null
+        ];
 
 
+        $error = '';
         if ($this->isPost()) {
-
             if (isset($_FILES["img"])) {
                 $photo = $_FILES["img"];
                 if ($photo["error"] === 0) {
@@ -76,38 +76,39 @@ class PostController extends Controller {
                     if (in_array($photo_type, $types)) {
                         $photo_name = uniqid() . $photo['name'];
                         if ($photo["size"] > 4000000) {
-                            echo "File size is bigger 4mb" . "<br>";
-                            echo "Please choose smaller file";
-                            return;
+                            $error .= "File size is bigger 4mb" . "<br>";
+                            $error .= "Please choose smaller file";
                         } else {
                             move_uploaded_file($photo["tmp_name"], "./assets/images/" . $photo_name);
                         }
                     } else {
-                        echo 'Not allowed file type';
+                        $error = 'Not allowed file type';
                     }
                 } else {
-                    echo "Upload error";
+                    $error = "Upload error";
                 }
             }
 
-            $create = $this->model->addNews($items);
+            if (!$error) {
+                $create = $this->model->addNews($items);
 
-            if ($create) {
-                $this->redirect('post', [
-                    'alert' => 'Successfully Added'
-                ]);
+                if ($create) {
+                    $this->redirect('post', [
+                        'alert' => 'Successfully Added'
+                    ]);
+                }
             }
+
         }
         $items['id'] = '';
 
         $this->render('form', [
             'item' => $items,
             'menu' => $menu,
+            'error' => $error,
         ]);
 
-        }
-
-
+    }
 
 
 }
