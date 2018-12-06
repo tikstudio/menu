@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-header card-header-primary">
 
-                <a href="<?= SITE_URL ?>/main/create" style="float: right;">
+                <a href="<?= SITE_URL ?>/post/create" style="float: right;">
                     <i class="material-icons text-white">queue</i>
                 </a>
 
-                <h4 class="card-title ">Menu Table</h4>
+                <h4 class="card-title ">News Table</h4>
                 <p class="card-category"> Here is a subtitle for this table</p>
 
             </div>
@@ -26,7 +26,10 @@
                                 Slug
                             </th>
                             <th>
-                                Parent
+                                News
+                            </th>
+                            <th>
+                                Image
                             </th>
                             <th>
                                 Status
@@ -35,7 +38,10 @@
                                 Sort
                             </th>
                             <th>
-                                &nbsp;
+                                Date
+                            </th>
+                            <th>
+
                             </th>
                         </tr>
                         </thead>
@@ -52,7 +58,10 @@
                                     <?= $m['slug'] ?>
                                 </td>
                                 <td>
-                                    <?= $m['p_id'] ?>
+                                    <?= $m['news'] ?>
+                                </td>
+                                <td>
+                                    <?= $m['image'] ?>
                                 </td>
                                 <td>
                                     <?= $m['status'] ?>
@@ -60,11 +69,15 @@
                                 <td>
                                     <?= $m['sort'] ?>
                                 </td>
+                                <td>
+                                    <?= $m['date'] ?>
+                                </td>
+
                                 <td style="width: 70px;">
-                                    <a href="<?= SITE_URL ?>/main/update?id=<?= $m['id'] ?>">
+                                    <a href="<?= SITE_URL ?>/post/update?id=<?= $m['id'] ?>">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
-                                    <a href="<?= SITE_URL ?>/main/delete?id=<?= $m['id'] ?>">
+                                    <a href="<?= SITE_URL ?>/post/delete?id=<?= $m['id'] ?>">
                                         <i class="material-icons text-danger"
                                            onclick="return confirm('Really delete?');">delete</i>
                                     </a>

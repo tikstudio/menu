@@ -44,8 +44,16 @@ abstract class Controller {
         return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
-    protected function redirect($to) {
-        header('Location: ' . SITE_URL . '/' . $to);
+    protected function redirect($to, $params = []) {
+        $q = '';
+        if (!empty($params)) {
+            $arr = [];
+            foreach ($params as $key => $val) {
+                $arr[] = $key . '=' . $val;
+            }
+            $q = '?' . implode('&', $arr);
+        }
+        header('Location: ' . SITE_URL . '/' . $to . $q);
         exit();
     }
 

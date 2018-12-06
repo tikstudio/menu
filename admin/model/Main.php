@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: tik
+ * Date: 02/12/18
+ * Time: 13:03
+ */
 
 namespace model;
 
@@ -16,23 +21,21 @@ class Main extends Model {
         ]);
     }
 
+    public function updateMenu($data) {
+        return $this->query(
+            "UPDATE menu SET title=:title, slug=:slug, p_id=:p_id, status=:status, sort=:sort WHERE id=:id",
+            $data);
+    }
 
-    public function deleteRow($id){
-        return $this->getRow("DELETE FROM menu where id=:id",[
+    public function deleteMenu($id) {
+        return $this->getRow("DELETE FROM menu where id=:id", [
             'id' => $id
         ]);
     }
 
+    public function addCategory($data) {
+        return $this->query("INSERT INTO menu(`title`, `slug`, `p_id`, `sort`, `status`)
+                          VALUES(:title, :slug, :p_id, :sort, :status)", $data);
 
-    public function updateMenu($id, $title, $slug, $p_id, $status, $sort){
-        return $this->query("UPDATE menu SET title=:title, slug=:slug, p_id=:p_id,status=:status, sort=:sort WHERE id=:id",[
-            'id' => $id,
-            'title' => $title,
-            'slug' => $slug,
-            'p_id' => $p_id,
-            'status' => $status,
-            'sort' => $sort,
-        ]);
     }
-
 }
