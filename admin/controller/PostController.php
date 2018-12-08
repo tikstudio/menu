@@ -14,10 +14,13 @@ class PostController extends Controller
 
     function actionIndex()
     {
+        $category = $this->model->getCategory();
         $post_news = $this->model->getNews();
         $this->render('index', [
-            'post_news' => $post_news
+            'post_news' => $post_news,
+            'category' => $category
         ]);
+
     }
 
     public function actionUpdateNews()
@@ -25,14 +28,13 @@ class PostController extends Controller
         $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
         $item = $this->model->getNewsById($id);
         $menu = $this->model->getNews();
-
-
+        $category = $this->model->getCategory();
 
 
         if ($this->isPost()) {
 
             if (isset($_FILES["file"])) {
-                $file_name ='';
+                $file_name = '';
                 if ($_FILES["file"]["error"] === 0) {
                     $file_types = [
                         "image/png" => '.png',
@@ -53,10 +55,11 @@ class PostController extends Controller
                 'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : null,
                 'description' => isset($_POST['desc']) ? $_POST['desc'] : null,
                 'date' => date("Y-m-d H:i:s"),
-
                 'status' => isset($_POST['status']) ? $_POST['status'] : '1',
                 'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
+                'category' => isset($_POST['checkText']) ? $_POST['checkText'] : null,
                 'id' => isset($_POST['id']) ? (int)$_POST['id'] : null,
+
             ];
 
 
@@ -72,6 +75,7 @@ class PostController extends Controller
         $this->render('form', [
             'item' => $item,
             'menu' => $menu,
+            'category' => $category
         ]);
     }
 
@@ -90,6 +94,8 @@ class PostController extends Controller
     public function actionCreateNews()
     {
         $menu = $this->model->getNews();
+        $category = $this->model->getCategory();
+
         $file_name = '';
 
         if (isset($_FILES["file"])) {
@@ -131,7 +137,11 @@ class PostController extends Controller
         $this->render('form', [
             'item' => $items,
             'menu' => $menu,
+            'category' => $category
+
         ]);
 
     }
+
+
 }

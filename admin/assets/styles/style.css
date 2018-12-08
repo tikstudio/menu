@@ -8,3 +8,6 @@
     height: 100px;
     background-size: cover;
 }
+#checkText{
+    max-width: 500px;
+}

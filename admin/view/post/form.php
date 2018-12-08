@@ -51,6 +51,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="bmd-label-floating">Category</label>
+
+                            <div class="form-group bmd-form-group">
+                                <?php foreach ($category as $categories): ?>
+                                    <input type="checkbox" class="check_box" value="<?= $categories['title']?>"> <?= $categories['title'] ?>
+                                <?php endforeach; ?><br>
+                                <textarea type="text" name="checkText" id="checkText" placeholder="Choose category"></textarea>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="hidden" name="status" value="0">
@@ -64,6 +76,8 @@
                             </span>
                         </label>
                     </div>
+
+
                     <button type="submit" class="btn btn-primary pull-right">
                         <?= $item['id'] ? 'Update News' : 'Create News' ?>
                     </button>

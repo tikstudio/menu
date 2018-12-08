@@ -25,5 +25,15 @@ jQuery(document).ready(function () {
             $('[name="new_slug"]').val(text).change();
         }
     });
+    $('.check_box').click(function() {
+        var text = '';
+        $('.check_box:checked').each(function () {
+            text+=$(this).val()+" ";
+        });
+
+        text = text.substring(0, text.length -1);
+        $('#checkText').val(text);
+        var count = $("[type='checkbox']:checked").length;
+    })
 
 });

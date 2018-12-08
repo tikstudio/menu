@@ -24,7 +24,7 @@ class Post extends Model
 
     public function updateNews($data) {
         return $this->query(
-            "UPDATE news SET title=:title,image=:image, slug=:slug, description=:description, status=:status,date=:date, sort=:sort WHERE id=:id",
+            "UPDATE news SET title=:title,image=:image, slug=:slug, description=:description,category=:category, status=:status,date=:date, sort=:sort WHERE id=:id",
             $data);
     }
 
@@ -38,6 +38,9 @@ class Post extends Model
         return $this->query("INSERT INTO news(`title`, `image`, `slug`, `status`, `sort`, `description`,`date`)
                           VALUES(:title, :image, :slug, :status, :sort, :description, :date)", $data);
 
+    }
+    public function getCategory() {
+        return $this->getRows('select * from menu order by sort');
     }
 
 }

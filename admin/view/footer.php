@@ -34,6 +34,7 @@
 <script src="<?= SITE_URL ?>/assets/scripts/plugins/bootstrap-selectpicker.js"></script>
 <script src="<?= SITE_URL ?>/assets/scripts/plugins/bootstrap-notify.js"></script>
 <script src="<?= SITE_URL ?>/assets/scripts/script.js"></script>
+<script src="<?= SITE_URL ?>/assets/styles/style.css"></script>
 
 </body>
 </html>

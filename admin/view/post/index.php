@@ -39,6 +39,9 @@
                                Description
                             </th>
                             <th>
+                               Category
+                            </th>
+                            <th>
                                Date
                             </th>
                             <th>
@@ -48,7 +51,13 @@
                         </thead>
                         <tbody>
 
+
                         <?php foreach ($post_news as $news): ?>
+<!--                        --><?php //$a = $news['category'];
+//                            $array = explode(' ', $a);
+//
+//                            var_dump($array);
+//                        exit()?>
                             <tr>
                                 <td>
                                     <?= $news['id'] ?>
@@ -57,7 +66,7 @@
                                     <?= $news['title'] ?>
                                 </td>
                                 <td>
-                                    <img src=" <?= SITE_URL ?>assets/img/uploads/<?= $news['image'] ?>" class="newsImg" alt="" width="100" height="100">
+                                    <img src="<?= SITE_URL ?>assets/img/uploads/<?= $news['image'] ?>" class="newsImg" alt="" width="50" height="50">
 
                                 </td>
                                 <td>
@@ -73,7 +82,9 @@
                                     <?= mb_substr($news['description'],0, 20).'...' ?>
                                 </td>
                                 <td>
-
+                                    <?= $news['category'] ?>
+                                </td>
+                                <td>
                                     <?= $news['date'] ?>
                                 </td>
                                 <td style="width: 70px;">
@@ -87,6 +98,7 @@
                                 </td>
                             </tr>
                         <?php endforeach; ?>
+
 
                         </tbody>
                     </table>
