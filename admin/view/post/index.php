@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header card-header-primary">
 
-                <a href="<?= SITE_URL ?>post/createNews" style="float: right;">
+                <a href="<?= SITE_URL ?>/post/create-news" style="float: right;">
                     <i class="material-icons text-white">queue</i>
                 </a>
 
@@ -36,10 +36,10 @@
                                 Sort
                             </th>
                             <th>
-                               Description
+                                Description
                             </th>
                             <th>
-                               Date
+                                Date
                             </th>
                             <th>
                                 &nbsp;
@@ -57,8 +57,8 @@
                                     <?= $news['title'] ?>
                                 </td>
                                 <td>
-                                    <img src=" <?= SITE_URL ?>assets/img/uploads/<?= $news['image'] ?>" class="newsImg" alt="" width="100" height="100">
-
+                                    <img src=" <?= SITE_URL ?>/assets/img/uploads/<?= $news['image'] ?>" class="newsImg"
+                                         alt="" width="100" height="100">
                                 </td>
                                 <td>
                                     <?= $news['slug'] ?>
@@ -70,17 +70,17 @@
                                     <?= $news['sort'] ?>
                                 </td>
                                 <td>
-                                    <?= mb_substr($news['description'],0, 20).'...' ?>
+                                    <?= mb_substr(strip_tags($news['description']), 0, 20) . '...' ?>
                                 </td>
                                 <td>
 
                                     <?= $news['date'] ?>
                                 </td>
                                 <td style="width: 70px;">
-                                    <a href="<?= SITE_URL ?>post/updateNews?id=<?= $news['id'] ?>">
+                                    <a href="<?= SITE_URL ?>/post/update-news?id=<?= $news['id'] ?>">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
-                                    <a href="<?= SITE_URL ?>post/deleteNews?id=<?= $news['id'] ?>">
+                                    <a href="<?= SITE_URL ?>/post/delete-news?id=<?= $news['id'] ?>">
                                         <i class="material-icons text-danger"
                                            onclick="return confirm('Really delete?');">delete</i>
                                     </a>

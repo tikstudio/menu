@@ -9,30 +9,24 @@
 namespace controller;
 
 
-class PostController extends Controller
-{
+class PostController extends Controller {
 
-    function actionIndex()
-    {
+    function actionIndex() {
         $post_news = $this->model->getNews();
         $this->render('index', [
             'post_news' => $post_news
         ]);
     }
 
-    public function actionUpdateNews()
-    {
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+    public function actionUpdateNews() {
+        $id = isset($_REQUEST['id']) ? (int)$_REQUEST['id'] : null;
         $item = $this->model->getNewsById($id);
         $menu = $this->model->getNews();
 
-
-
+        $file_name = $item['image'];
 
         if ($this->isPost()) {
-
             if (isset($_FILES["file"])) {
-                $file_name ='';
                 if ($_FILES["file"]["error"] === 0) {
                     $file_types = [
                         "image/png" => '.png',
@@ -53,12 +47,10 @@ class PostController extends Controller
                 'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : null,
                 'description' => isset($_POST['desc']) ? $_POST['desc'] : null,
                 'date' => date("Y-m-d H:i:s"),
-
                 'status' => isset($_POST['status']) ? $_POST['status'] : '1',
                 'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
                 'id' => isset($_POST['id']) ? (int)$_POST['id'] : null,
             ];
-
 
             $update = $this->model->updateNews($post_data);
             $this->redirect('post', [
@@ -76,8 +68,7 @@ class PostController extends Controller
     }
 
 
-    public function actionDeleteNews()
-    {
+    public function actionDeleteNews() {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
         $delete = $this->model->deleteNews($id);
         $this->redirect('post', [
@@ -87,8 +78,7 @@ class PostController extends Controller
     }
 
 
-    public function actionCreateNews()
-    {
+    public function actionCreateNews() {
         $menu = $this->model->getNews();
         $file_name = '';
 

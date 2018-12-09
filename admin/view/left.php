@@ -15,13 +15,13 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="nav-item active  ">
-                <a class="nav-link" href="<?= SITE_URL ?>main">
+                <a class="nav-link" href="<?= SITE_URL ?>/main">
                     <i class="material-icons">dashboard</i>
                     <p>Menu</p>
                 </a>
             </li>
             <li class="nav-item active  ">
-                <a class="nav-link" href="<?= SITE_URL ?>post">
+                <a class="nav-link" href="<?= SITE_URL ?>/post">
                     <i class="material-icons">dashboard</i>
                     <p>Post</p>
                 </a>
