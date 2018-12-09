@@ -9,9 +9,11 @@
 namespace model;
 
 
-class Post extends Model
-{
-    public function getNews(){
+class Post extends Model {
+    protected $tableName = 'news';
+
+
+    public function getNews() {
         return $this->getRows('select * from news order by sort');
     }
 

@@ -11,8 +11,9 @@ namespace controller;
 
 class PostController extends Controller {
 
+
     function actionIndex() {
-        $post_news = $this->model->getNews();
+        $post_news = $this->model->getData();
         $this->render('index', [
             'post_news' => $post_news
         ]);

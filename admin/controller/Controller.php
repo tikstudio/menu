@@ -23,6 +23,7 @@ abstract class Controller {
         $this->userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
         $this->title = '';
+
     }
 
     protected function render($view = 'index', $params = []) {
@@ -60,6 +61,7 @@ abstract class Controller {
     public static function error404() {
         include './view/404.php';
     }
+
 
     abstract function actionIndex();
 }
