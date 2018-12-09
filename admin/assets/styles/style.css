@@ -1,13 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/** {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*box-sizing: border-box;*/
+/*}*/
 .newsImg{
     width: 100px;
     height: 100px;
     background-size: cover;
 }
-#checkText{
-    max-width: 500px;
+
+.srch{
+    max-width: 10px; !important;
 }

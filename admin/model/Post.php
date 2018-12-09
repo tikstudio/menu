@@ -43,4 +43,17 @@ class Post extends Model
         return $this->getRows('select * from menu order by sort');
     }
 
+    public function search($search) {
+        $array_search = ['id', 'title', 'image', 'slug', 'status', 'sort', 'description', 'date', 'category'];
+
+        foreach ($array_search as $arr){
+            $res = $arr;
+        }
+
+        return $this->getRows("SELECT * FROM news WHERE $res LIKE :search",
+            [
+                'search' => '%' . $search . '%',
+            ]);
+    }
+
 }

@@ -13,12 +13,16 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <form action="<?= SITE_URL ?>/post/search-column" method="post">
+
                     <table class="table">
                         <thead class=" text-primary">
-
                         <tr>
+
+
                             <th>
                                 ID
+
                             </th>
                             <th>
                                 Title
@@ -36,13 +40,13 @@
                                 Sort
                             </th>
                             <th>
-                               Description
+                                Description
                             </th>
                             <th>
-                               Category
+                                Category
                             </th>
                             <th>
-                               Date
+                                Date
                             </th>
                             <th>
                                 &nbsp;
@@ -51,9 +55,20 @@
                         </thead>
                         <tbody>
 
+                        <tr>
+                            <?php $a = $post_news[0] ?>
+                            <?php foreach ($a as $key => $value) {
 
+                                ?>
+                                <td>
+                                    <input type="search" value="" name="<?= $key ?>" id="<?= $key ?>" placeholder="..." class="srch" style="max-width: 85px; border-radius: 8px">
+                                </td>
+                                <?php
+                            } ?>
+                        </tr>
                         <?php foreach ($post_news as $news): ?>
-<!--                        --><?php //$a = $news['category'];
+
+                            <!--                        --><?php //$a = $news['category'];
 //                            $array = explode(' ', $a);
 //
 //                            var_dump($array);
@@ -66,7 +81,8 @@
                                     <?= $news['title'] ?>
                                 </td>
                                 <td>
-                                    <img src="<?= SITE_URL ?>assets/img/uploads/<?= $news['image'] ?>" class="newsImg" alt="" width="50" height="50">
+                                    <img src="<?= SITE_URL ?>assets/img/uploads/<?= $news['image'] ?>" class="newsImg"
+                                         alt="" width="50" height="50">
 
                                 </td>
                                 <td>
@@ -79,13 +95,14 @@
                                     <?= $news['sort'] ?>
                                 </td>
                                 <td>
-                                    <?= mb_substr($news['description'],0, 20).'...' ?>
+                                    <?= mb_substr($news['description'], 0, 20) . '...' ?>
                                 </td>
                                 <td>
                                     <?= $news['category'] ?>
                                 </td>
                                 <td>
                                     <?= $news['date'] ?>
+
                                 </td>
                                 <td style="width: 70px;">
                                     <a href="<?= SITE_URL ?>post/updateNews?id=<?= $news['id'] ?>">
@@ -97,11 +114,14 @@
                                     </a>
                                 </td>
                             </tr>
+
                         <?php endforeach; ?>
 
 
                         </tbody>
                     </table>
+                    </form>
+
                 </div>
             </div>
         </div>

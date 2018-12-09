@@ -25,15 +25,40 @@ jQuery(document).ready(function () {
             $('[name="new_slug"]').val(text).change();
         }
     });
-    $('.check_box').click(function() {
+    $('.check_box').click(function () {
         var text = '';
         $('.check_box:checked').each(function () {
-            text+=$(this).val()+" ";
+            text += $(this).val() + " ";
         });
 
-        text = text.substring(0, text.length -1);
+        text = text.substring(0, text.length - 1);
         $('#checkText').val(text);
         var count = $("[type='checkbox']:checked").length;
     })
+
+    var ajax;
+    var array_search = ['id', 'title', 'image', 'slug', 'status', 'sort', 'description', 'date', 'category'];
+    array_search.forEach(function (elem) {
+
+        $('#'+elem).keyup(function (ev) {
+            ev.preventDefault();
+            var txt = $(this).val();
+            if (ajax) {
+                ajax.abort()
+            }
+               ajax = $.ajax({
+                url: '/post/search',
+                method: "post",
+                data: {
+                    search: txt
+                },
+                dataType: "text",
+            }).done(function (data) {
+                $('.card-body').html(data);
+            });
+
+        })
+    });
+
 
 });

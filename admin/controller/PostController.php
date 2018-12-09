@@ -143,5 +143,20 @@ class PostController extends Controller
 
     }
 
+    public function actionSearch()
+    {
+
+        $array_search = ['id', 'title', 'image', 'slug', 'status', 'sort', 'description', 'date', 'category'];
+
+        foreach ($array_search as $search) {
+            $search = isset($search) ? $search : '';
+        }
+        $search_result = $this->model->search($search);
+
+        $this->render('search-column', [
+            'search_result' => $search_result,
+        ]);
+    }
+
 
 }
