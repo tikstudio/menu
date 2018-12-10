@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Created by PhpStorm.
+ * User: Gasparyan
+ * Date: 05.12.2018
+ * Time: 20:03
+ */
+
 
 namespace controller;
 
@@ -7,39 +14,47 @@ namespace controller;
 class PostController extends Controller {
 
     function actionIndex() {
-        $menu = $this->model->getMenu();
+        $post_news = $this->model->getData();
         $this->render('index', [
-            'menu' => $menu
-        ]);
-
-
-    }
-
-    public function actionDelete() {
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
-        $this->model->deleteNews($id);
-        $this->redirect('post', [
-            'alert' => 'Successfully Deleted',
-            'type' => 'warning',
+            'post_news' => $post_news
         ]);
     }
 
+    public function actionUpdateNews() {
+        $id = isset($_REQUEST['id']) ? (int)$_REQUEST['id'] : null;
+        $item = $this->model->getNewsById($id);
+        $menu = $this->model->getNews();
 
-    public function actionUpdate() {
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
-        $item = $this->model->getMenuById($id);
-        $menu = $this->model->getMenu();
+        $file_name = $item['image'];
 
         if ($this->isPost()) {
+            if (isset($_FILES["file"])) {
+                if ($_FILES["file"]["error"] === 0) {
+                    $file_types = [
+                        "image/png" => '.png',
+                        "image/jpeg" => '.jpg',
+                    ];
+                    $file_type = $_FILES["file"]['type'];
+                    if (isset($file_types[$file_type])) {
+                        $file_name = uniqid() . $file_types[$file_type];
+                        move_uploaded_file(
+                            $_FILES["file"]["tmp_name"],
+                            "assets/img/uploads/" . $file_name);
+                    }
+                }
+            }
             $post_data = [
                 'title' => isset($_POST['new_title']) ? $_POST['new_title'] : '',
-                'news' => isset($_POST['news']) ? htmlspecialchars($_POST['news']) : '',
-                'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : '',
-                'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
+                'image' => $file_name,
+                'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : null,
+                'description' => isset($_POST['desc']) ? $_POST['desc'] : null,
+                'date' => date("Y-m-d H:i:s"),
                 'status' => isset($_POST['status']) ? $_POST['status'] : '1',
+                'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
                 'id' => isset($_POST['id']) ? (int)$_POST['id'] : null,
             ];
-            $this->model->updateNews($post_data);
+
+            $update = $this->model->updateNews($post_data);
             $this->redirect('post', [
                 'alert' => 'Successfully Updated'
             ]);
@@ -53,62 +68,62 @@ class PostController extends Controller {
     }
 
 
-    public function actionCreate() {
-        $menu = $this->model->getMenu();
+    public function actionDeleteNews() {
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+        $delete = $this->model->deleteNews($id);
+        $this->redirect('post', [
+            'alert' => 'Successfully Deleted',
+            'type' => 'warning',
+        ]);
+    }
 
+
+    public function actionCreateNews() {
+        $menu = $this->model->getNews();
+        $file_name = '';
+
+        if (isset($_FILES["file"])) {
+            if ($_FILES["file"]["error"] === 0) {
+                $file_types = [
+                    "image/png" => '.png',
+                    "image/jpeg" => '.jpg',
+                ];
+                $file_type = $_FILES["file"]['type'];
+                if (isset($file_types[$file_type])) {
+                    $file_name = uniqid() . $file_types[$file_type];
+                    move_uploaded_file(
+                        $_FILES["file"]["tmp_name"],
+                        "assets/img/uploads/" . $file_name);
+
+                }
+            }
+        }
         $items = [
             'title' => isset($_POST['new_title']) ? $_POST['new_title'] : '',
+            'image' => $file_name,
             'slug' => isset($_POST['new_slug']) ? $_POST['new_slug'] : '',
-            'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
             'status' => isset($_POST['status']) ? $_POST['status'] : null,
-            'image' => isset($_POST['img']) ? $_POST['img'] : '',
-            'news' => isset($_POST['news']) ? htmlspecialchars($_POST['news']) : null
+            'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
+            'description' => isset($_POST['desc']) ? $_POST['desc'] : null,
+            'date' => date("Y-m-d H:i:s"),
+
         ];
-
-
-        $error = '';
         if ($this->isPost()) {
-            if (isset($_FILES["img"])) {
-                $photo = $_FILES["img"];
-                if ($photo["error"] === 0) {
-                    $types = ["image/png", "image/jpeg"];
-                    $photo_type = $photo["type"];
-                    if (in_array($photo_type, $types)) {
-                        $photo_name = uniqid() . $photo['name'];
-                        if ($photo["size"] > 4000000) {
-                            $error .= "File size is bigger 4mb" . "<br>";
-                            $error .= "Please choose smaller file";
-                        } else {
-                            move_uploaded_file($photo["tmp_name"], "./assets/images/" . $photo_name);
-                        }
-                    } else {
-                        $error = 'Not allowed file type';
-                    }
-                } else {
-                    $error = "Upload error";
-                }
+            $create = $this->model->addNews($items);
+            if ($create) {
+                $this->redirect('post', [
+                    'alert' => 'Successfully Created'
+                ]);
             }
-
-            if (!$error) {
-                $create = $this->model->addNews($items);
-
-                if ($create) {
-                    $this->redirect('post', [
-                        'alert' => 'Successfully Added'
-                    ]);
-                }
-            }
-
         }
         $items['id'] = '';
 
         $this->render('form', [
             'item' => $items,
             'menu' => $menu,
-            'error' => $error,
+
         ]);
 
     }
-
 
 }

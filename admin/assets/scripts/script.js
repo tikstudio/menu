@@ -26,4 +26,14 @@ jQuery(document).ready(function () {
         }
     });
 
+    ClassicEditor
+        .create($('#editor').get(0), {
+            ckfinder: {
+                uploadUrl: SITE_URL + '/image-uploader'
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
 });

@@ -3,16 +3,18 @@
         <div class="card">
             <div class="card-header card-header-primary">
                 <h4 class="card-title">
-                    <?= $item['id'] ? 'Edit' : 'Add' ?>
+                    <?= $item['id'] ? 'Edit ' : 'Add' ?>
+
                     News
                 </h4>
                 <p class="card-category"><?= $item['title'] ?></p>
 
             </div>
             <div class="card-body">
-                <form action="<?= SITE_URL ?>/post/<?= $item['id'] ? 'update' : 'create' ?>" method="post"
+
+                <form action="<?= SITE_URL ?>/post/<?= $item['id'] ? 'update-news' : 'create-news' ?>" method="post"
                       enctype="multipart/form-data">
-                    <?= $error ?>
+
                     <input type="hidden" name="id" value="<?= $item['id'] ?>">
                     <div class="row">
                         <div class="col-md-12">
@@ -24,13 +26,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group bmd-form-group">
-                                <label class="bmd-label-floating">News</label>
 
-                                <textarea name="news" id="news" style="width: 100%"><?= $item['news'] ?></textarea>
-                            </div>
+                            <label class="bmd-label-floating">Image</label>
+
+                            <input type="file" name="file" class="form-control" value="<?= $item['image'] ?>">
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">
@@ -39,6 +41,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row mt-5 mb-5">
+                        <div class="col-md-12">
+                            <textarea id="editor" name="desc" class=""
+                                      placeholder="Type desciption for news..."><?= $item['description'] ?> </textarea>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group bmd-form-group">
@@ -60,9 +70,9 @@
                             </span>
                         </label>
                     </div>
-                    <input type="file" name="img">
                     <button type="submit" class="btn btn-primary pull-right">
-                        <?= $item['id'] ? 'Update' : 'Add' ?>
+                        <?= $item['id'] ? 'Update News' : 'Create News' ?>
+
                     </button>
                     <div class="clearfix"></div>
                 </form>

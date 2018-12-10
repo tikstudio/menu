@@ -21,9 +21,8 @@ if (empty($referer_arr[1])) {
     $referer_arr[1] = 'index';
 }
 
-$controller_name = ucfirst($referer_arr[0]);
-$controller_name = 'controller\\' . $controller_name . 'Controller';
-
+$controller_name = ucwords(str_replace('-', ' ', $referer_arr[0]));
+$controller_name = 'controller\\' . str_replace(' ', '', $controller_name) . 'Controller';
 if (class_exists($controller_name)) {
     $controller = new $controller_name();
 

@@ -3,3 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+.newsImg{
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+}
+.table-responsive thead > tr > th{
+    vertical-align: top;
+}
+.table-responsive tr input{
+    width: 100%;
+}

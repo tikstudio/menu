@@ -7,7 +7,7 @@ class MainController extends Controller {
 
     public function actionIndex() {
 
-        $menu = $this->model->getMenu();
+        $menu = $this->model->getData();
         $this->render('index', [
             'menu' => $menu
         ]);
