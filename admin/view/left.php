@@ -13,16 +13,6 @@
         </a>
     </div>
     <div class="sidebar-wrapper">
-
-        <ul class="nav">
-            <li class="nav-item active  ">
-                <a class="nav-link" href="<?= SITE_URL ?>">
-                    <i class="material-icons">dashboard</i>
-                    <p>Menu</p>
-                </a>
-            </li>
-            <!-- your sidebar here -->
-        </ul>
         <ul class="nav">
             <li class="nav-item active  ">
                 <a class="nav-link" href="<?= SITE_URL ?>/main">
