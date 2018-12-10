@@ -75,7 +75,7 @@
                                     <td>
                                         <img src=" <?= SITE_URL ?>/assets/img/uploads/<?= $news['image'] ?>"
                                              class="newsImg"
-                                             alt="" width="100" height="100">
+                                             alt="" style="object-fit: cover" width="100" height="100">
                                     </td>
                                     <td>
                                         <?= $news['slug'] ?>

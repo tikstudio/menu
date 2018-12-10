@@ -13,29 +13,41 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <form action="" method="get">
                     <table class="table">
                         <thead class=" text-primary">
                         <tr>
                             <th>
                                 ID
+                                <input type="text" name="id" class="form-control">
                             </th>
                             <th>
                                 Title
+                                <input type="text" name="title" class="form-control"
+                                       value="<?= isset($_GET['title']) ? $_GET['title'] : '' ?>">
                             </th>
                             <th>
                                 Slug
+                                <input type="text" name="slug" class="form-control"
+                                       value="<?= isset($_GET['slug']) ? $_GET['slug'] : '' ?>">
                             </th>
                             <th>
                                 Parent
                             </th>
                             <th>
                                 Status
+                                <input type="checkbox" name="status" value="1"
+                                       value="<?= isset($_GET['slug']) ? $_GET['slug'] : '' ?>">
                             </th>
                             <th>
                                 Sort
+                                <input type="text" name="sort" class="form-control"
+                                       value="<?= isset($_GET['sort']) ? $_GET['sort'] : '' ?>">
                             </th>
                             <th>
-                                &nbsp;
+                                &nbsp;<button class="btn btn-fab btn-white" name="s">
+                                    <i class="material-icons text-success">search</i>
+                                </button>
                             </th>
                         </tr>
                         </thead>
@@ -74,6 +86,7 @@
 
                         </tbody>
                     </table>
+                    </form>
                 </div>
             </div>
         </div>
