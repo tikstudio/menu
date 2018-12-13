@@ -10,6 +10,12 @@ namespace model;
 
 
 class Main extends Model {
+    protected $tableName = 'menu';
+
+//    public function __construct() {
+//        parent::__construct();
+//        $this->tableName = 'menu';
+//    }
 
     public function getMenu() {
         return $this->getRows('select * from menu order by sort');

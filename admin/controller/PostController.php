@@ -11,28 +11,24 @@ namespace controller;
 
 class PostController extends Controller
 {
-
     function actionIndex()
     {
-        $category = $this->model->getCategory();
-        $post_news = $this->model->getNews();
+        $post_news = $this->model->getData();
         $this->render('index', [
             'post_news' => $post_news,
-            'category' => $category
         ]);
-
     }
 
     public function actionUpdateNews()
     {
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+        $id = isset($_REQUEST['id']) ? (int)$_REQUEST['id'] : null;
         $item = $this->model->getNewsById($id);
+
         $menu = $this->model->getNews();
         $category = $this->model->getCategory();
 
-
+        $file_name = $item['image'];
         if ($this->isPost()) {
-
             if (isset($_FILES["file"])) {
                 $file_name = '';
                 if ($_FILES["file"]["error"] === 0) {
@@ -57,11 +53,9 @@ class PostController extends Controller
                 'date' => date("Y-m-d H:i:s"),
                 'status' => isset($_POST['status']) ? $_POST['status'] : '1',
                 'sort' => isset($_POST['sort']) ? $_POST['sort'] : null,
-                'category' => isset($_POST['checkText']) ? $_POST['checkText'] : null,
                 'id' => isset($_POST['id']) ? (int)$_POST['id'] : null,
 
             ];
-
 
             $update = $this->model->updateNews($post_data);
             $this->redirect('post', [
@@ -70,12 +64,11 @@ class PostController extends Controller
 
 
         }
-
-
         $this->render('form', [
             'item' => $item,
             'menu' => $menu,
-            'category' => $category
+            'category' => $category,
+
         ]);
     }
 
@@ -126,6 +119,7 @@ class PostController extends Controller
         ];
         if ($this->isPost()) {
             $create = $this->model->addNews($items);
+
             if ($create) {
                 $this->redirect('post', [
                     'alert' => 'Successfully Created'
@@ -137,26 +131,8 @@ class PostController extends Controller
         $this->render('form', [
             'item' => $items,
             'menu' => $menu,
-            'category' => $category
-
+            'category' => $category,
         ]);
 
     }
-
-    public function actionSearch()
-    {
-
-        $array_search = ['id', 'title', 'image', 'slug', 'status', 'sort', 'description', 'date', 'category'];
-
-        foreach ($array_search as $search) {
-            $search = isset($search) ? $search : '';
-        }
-        $search_result = $this->model->search($search);
-
-        $this->render('search-column', [
-            'search_result' => $search_result,
-        ]);
-    }
-
-
 }

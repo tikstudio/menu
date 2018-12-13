@@ -26,6 +26,12 @@
                     <p>Post</p>
                 </a>
             </li>
+            <li class="nav-item active  ">
+                <a class="nav-link" href="<?= SITE_URL ?>category">
+                    <i class="material-icons">dashboard</i>
+                    <p>Category</p>
+                </a>
+            </li>
             <!-- your sidebar here -->
         </ul>
     </div>

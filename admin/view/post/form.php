@@ -10,7 +10,8 @@
 
             </div>
             <div class="card-body">
-                <form action="<?= SITE_URL ?>post/<?= $item['id'] ? 'updateNews' : 'createNews' ?>" method="post" enctype="multipart/form-data">
+                <form action="<?= SITE_URL ?>/post/<?= $item['id'] ? 'update-news' : 'create-news' ?>" method="post"
+                      enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $item['id'] ?>">
                     <div class="row">
                         <div class="col-md-12">
@@ -24,7 +25,7 @@
                         <div class="col-md-12">
                             <label class="bmd-label-floating">Image</label>
 
-                            <input type="file" name="file" class="form-control" value="<?= $item['image']?>" >
+                            <input type="file" name="file" class="form-control" value="<?= $item['image'] ?>">
                         </div>
                     </div>
 
@@ -37,11 +38,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Description</label>
-                        <textarea name="desc" class="form-control type_msg"
-                                  placeholder="Type desciption for news..."><?= $item['description'] ?> </textarea>
+                    <div class="row mt-5 mb-5">
+                        <div class="col-md-12">
+                            <textarea id="editor" name="desc" class=""
+                                      placeholder="Type desciption for news..."><?= $item['description'] ?> </textarea>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -54,15 +55,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label class="bmd-label-floating">Category</label>
-
                             <div class="form-group bmd-form-group">
-                                <?php foreach ($category as $categories): ?>
-                                    <input type="checkbox" class="check_box" value="<?= $categories['title']?>"> <?= $categories['title'] ?>
-                                <?php endforeach; ?><br>
-                                <textarea type="text" name="checkText" id="checkText" placeholder="Choose category"></textarea>
+                    <?php
+                    foreach ($category as $val){
+                        ?>
+                        <input type="checkbox" name="category[]" value="<?=$val['title'] ?>"><?= $val['title']?>
+                    <?php
+                    }
+                    ?>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="hidden" name="status" value="0">
@@ -76,7 +80,6 @@
                             </span>
                         </label>
                     </div>
-
 
                     <button type="submit" class="btn btn-primary pull-right">
                         <?= $item['id'] ? 'Update News' : 'Create News' ?>

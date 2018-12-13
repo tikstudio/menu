@@ -1,14 +1,17 @@
-/** {*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-    /*box-sizing: border-box;*/
-/*}*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .newsImg{
     width: 100px;
     height: 100px;
     background-size: cover;
 }
+.table-responsive thead > tr > th{
+    vertical-align: top;
+}
+.table-responsive tr input{
+    width: 100%;
 
-.srch{
-    max-width: 10px; !important;
 }

@@ -36,29 +36,14 @@ jQuery(document).ready(function () {
         var count = $("[type='checkbox']:checked").length;
     })
 
-    var ajax;
-    var array_search = ['id', 'title', 'image', 'slug', 'status', 'sort', 'description', 'date', 'category'];
-    array_search.forEach(function (elem) {
-
-        $('#'+elem).keyup(function (ev) {
-            ev.preventDefault();
-            var txt = $(this).val();
-            if (ajax) {
-                ajax.abort()
+    ClassicEditor
+        .create($('#editor').get(0), {
+            ckfinder: {
+                uploadUrl: SITE_URL + '/image-uploader'
             }
-               ajax = $.ajax({
-                url: '/post/search',
-                method: "post",
-                data: {
-                    search: txt
-                },
-                dataType: "text",
-            }).done(function (data) {
-                $('.card-body').html(data);
-            });
-
         })
-    });
-
+        .catch(error => {
+            console.error(error);
+        });
 
 });
