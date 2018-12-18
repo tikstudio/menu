@@ -2,7 +2,6 @@
 
 namespace includes;
 
-use mysql_xdevapi\Exception;
 use \PDO;
 
 class DbManager {

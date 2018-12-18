@@ -3,18 +3,20 @@
 namespace controller;
 
 
-class MainController extends Controller {
+class MainController extends Controller
+{
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
 
         $menu = $this->model->getData();
         $this->render('index', [
             'menu' => $menu
         ]);
-
     }
 
-    public function actionUpdate() {
+    public function actionUpdate()
+    {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
         $item = $this->model->getMenuById($id);
         $menu = $this->model->getMenu();
@@ -33,8 +35,6 @@ class MainController extends Controller {
                 'alert' => 'Successfully Updated'
             ]);
         }
-
-
         $this->render('form', [
             'item' => $item,
             'menu' => $menu,
@@ -42,7 +42,8 @@ class MainController extends Controller {
     }
 
 
-    public function actionDelete() {
+    public function actionDelete()
+    {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
         $delete = $this->model->deleteMenu($id);
         $this->redirect('main', [
@@ -51,7 +52,8 @@ class MainController extends Controller {
         ]);
     }
 
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $menu = $this->model->getMenu();
         $items = [
             'title' => isset($_POST['new_title']) ? $_POST['new_title'] : '',
