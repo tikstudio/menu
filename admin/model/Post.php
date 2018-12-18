@@ -42,4 +42,38 @@ class Post extends Model {
 
     }
 
+    public function setCategory($id, $cat_ids, $old_ids = []) {
+        foreach ($old_ids as $del_id) {
+            if (!in_array($del_id, $cat_ids)) {
+                $this->query('DELETE FROM cat_rel WHERE obj_id = :id AND cat_id = :cat_id', [
+                    'id' => $id,
+                    'cat_id' => $del_id,
+                ]);
+            }
+        }
+        foreach ($cat_ids as $cat_id) {
+            if (!$this->hasCategory($id, $cat_id)) {
+                $this->query("INSERT INTO cat_rel(`obj_id`, `cat_id`)
+                          VALUES(:id, :cat_id)", [
+                    'id' => $id,
+                    'cat_id' => $cat_id,
+                ]);
+            }
+        }
+    }
+
+    public function hasCategory($id, $cat_id) {
+        return $this->getVar('SELECT id FROM cat_rel WHERE obj_id = :id AND cat_id = :cat_id', [
+            'id' => $id,
+            'cat_id' => $cat_id,
+        ]);
+    }
+
+
+    public function getCategoryIds($id) {
+        return $this->getCol('SELECT cat_id FROM cat_rel WHERE obj_id = :id', [
+            'id' => $id,
+        ]);
+    }
+
 }
