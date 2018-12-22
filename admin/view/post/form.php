@@ -57,6 +57,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="border-bottom mb-5">
+                        Categories
+                        <?php foreach ($all_cat as $cat) : ?>
+                            <div class="col-md-12 form-check">
+                                <label class="form-check-label">
+                                    <input <?= in_array($cat['id'], $cat_ids) ? 'checked=""' : '' ?>
+                                            class="form-check-input"
+                                            type="checkbox" name="cat_id[]"
+                                            value="<?= $cat['id'] ?>">
+                                    <?= $cat['title'] ?>
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="hidden" name="status" value="0">
@@ -70,6 +87,8 @@
                             </span>
                         </label>
                     </div>
+
+
                     <button type="submit" class="btn btn-primary pull-right">
                         <?= $item['id'] ? 'Update News' : 'Create News' ?>
 

@@ -11,6 +11,8 @@
 namespace controller;
 
 
+use model\Category;
+
 class PostController extends Controller {
 
     function actionIndex() {
@@ -24,7 +26,9 @@ class PostController extends Controller {
         $id = isset($_REQUEST['id']) ? (int)$_REQUEST['id'] : null;
         $item = $this->model->getNewsById($id);
         $menu = $this->model->getNews();
-
+        $category_model = new Category();
+        $all_cat = $category_model->getData();
+        $cat_ids = $this->model->getCategoryIds($id);
         $file_name = $item['image'];
 
         if ($this->isPost()) {
@@ -43,6 +47,7 @@ class PostController extends Controller {
                     }
                 }
             }
+
             $post_data = [
                 'title' => isset($_POST['new_title']) ? $_POST['new_title'] : '',
                 'image' => $file_name,
@@ -55,6 +60,9 @@ class PostController extends Controller {
             ];
 
             $update = $this->model->updateNews($post_data);
+            $cat_id = isset($_POST['cat_id']) ? $_POST['cat_id'] : [];
+            $this->model->setCategory($id, $cat_id, $cat_ids);
+
             $this->redirect('post', [
                 'alert' => 'Successfully Updated'
             ]);
@@ -64,6 +72,8 @@ class PostController extends Controller {
         $this->render('form', [
             'item' => $item,
             'menu' => $menu,
+            'cat_ids' => $cat_ids ? $cat_ids : [],
+            'all_cat' => $all_cat,
         ]);
     }
 
@@ -81,6 +91,8 @@ class PostController extends Controller {
     public function actionCreateNews() {
         $menu = $this->model->getNews();
         $file_name = '';
+        $category_model = new Category();
+        $all_cat = $category_model->getData();
 
         if (isset($_FILES["file"])) {
             if ($_FILES["file"]["error"] === 0) {
@@ -109,8 +121,13 @@ class PostController extends Controller {
 
         ];
         if ($this->isPost()) {
-            $create = $this->model->addNews($items);
-            if ($create) {
+            $post_id = $this->model->addNews($items);
+
+            $cat_id = isset($_POST['cat_id']) ? $_POST['cat_id'] : [];
+
+            $this->model->setCategory($post_id, $cat_id);
+
+            if ($post_id) {
                 $this->redirect('post', [
                     'alert' => 'Successfully Created'
                 ]);
@@ -118,9 +135,13 @@ class PostController extends Controller {
         }
         $items['id'] = '';
 
+
         $this->render('form', [
             'item' => $items,
             'menu' => $menu,
+
+            'all_cat' => $all_cat,
+            'cat_ids' => [],
 
         ]);
 

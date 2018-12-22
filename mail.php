@@ -29,14 +29,14 @@ try {
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.mail.ru';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'tikstudio@mail.ru';                 // SMTP username
-    $mail->Password = '$this->helloWorld=1';                           // SMTP password
+//    $mail->Username = 'tikstudio@mail.ru';                 // SMTP username
+//    $mail->Password = '$this->helloWorld=1';                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('tikstudio@mail.ru', 'Tigran');
-    $mail->addAddress('tigran.inbox@gmail.com');
+//    $mail->setFrom('tikstudio@mail.ru', 'Tigran');
+//    $mail->addAddress('tigran.inbox@gmail.com');
 //    //Attachments
 //    $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 //    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
